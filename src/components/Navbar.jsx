@@ -1,119 +1,81 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Lock, Menu as MenuIcon, X } from 'lucide-react';
+import { STORE_CONFIG } from '../config/store';
 
-export function Navbar({
-  activeCategory,
-  onCategoryChange,
-  onOpenCart,
-  cartCount,
-  onAdminClick,
-  onHomeClick
-}) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Categorías con IDs en texto plano para evitar errores de importación
-  const categories = [
-    { id: 'all', name: 'Todos' },
-    { id: 'tortas', name: 'Tortas & Pasteles' },
-    { id: 'tartas', name: 'Tartas' },
-    { id: 'boxes', name: 'Boxes' },
-    { id: 'galletitas', name: 'Galletitas' },
-    { id: 'individuales', name: 'Individuales' },
-  ];
+export const Navbar = ({ settings, onOpenAdmin, cartCount = 0, onOpenCart }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#1C1917]/10">
-      {/* Top Banner */}
-      <div className="bg-[#1C1917] text-[#FAF7F2] text-xs py-1.5 text-center tracking-widest uppercase font-light">
-        Pedidos con mínimo 48hs de anticipación • La Plata
-      </div>
-
+    <nav className="fixed w-full z-50 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#1C1917]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex justify-between items-center h-20">
 
-          {/* Logo / Marca */}
-          <button
-            onClick={onHomeClick}
-            className="text-left group transition-opacity hover:opacity-80"
-          >
-            <span className="font-serif text-2xl md:text-3xl text-[#1C1917] tracking-tight block">
-              Evangeline
-            </span>
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#B89855] font-medium block">
-              Pastelería de Autor
-            </span>
-          </button>
-
-          {/* Categorías - Desktop */}
-          <nav className="hidden lg:flex items-center space-x-1">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => onCategoryChange(cat.id)}
-                className={`px-3 py-1.5 text-xs tracking-wider uppercase transition-all rounded-sm ${activeCategory === cat.id
-                    ? 'text-[#B89855] font-semibold border-b-2 border-[#B89855]'
-                    : 'text-[#1C1917]/70 hover:text-[#1C1917]'
-                  }`}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </nav>
-
-          {/* Acciones (Carrito & Admin Login) */}
-          <div className="flex items-center space-x-4">
+          {/* Menú Hamburguesa (Mobile) */}
+          <div className="flex items-center sm:hidden w-1/3">
             <button
-              onClick={onOpenCart}
-              className="relative p-2 text-[#1C1917] hover:text-[#B89855] transition-colors flex items-center gap-2"
-              aria-label="Carrito de compras"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-[#1C1917] hover:text-[#B89855] transition-colors p-2 -ml-2"
             >
-              <ShoppingBag size={22} strokeWidth={1.5} />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#B89855] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
+              {isMobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <MenuIcon size={24} strokeWidth={1.5} />}
             </button>
+          </div>
 
+          {/* Navegación Desktop */}
+          <div className="hidden sm:flex items-center space-x-8 w-1/3">
+            <a href="#catalogo" className="text-sm tracking-widest uppercase text-[#1C1917] hover:text-[#B89855] transition-colors">Catálogo</a>
+            <a href="#nosotros" className="text-sm tracking-widest uppercase text-[#1C1917] hover:text-[#B89855] transition-colors">Nosotros</a>
+          </div>
+
+          {/* Logo Central (Tipográfico) */}
+          <div className="flex-1 sm:flex-none flex justify-center w-1/3 sm:w-auto">
+            <a href="#" className="flex flex-col items-center group">
+              <span className="font-serif text-2xl md:text-3xl tracking-[0.2em] text-[#1C1917] uppercase font-light group-hover:opacity-80 transition-opacity">
+                {settings?.storeName || STORE_CONFIG?.name || 'Evangeline'}
+              </span>
+              <span className="text-[10px] tracking-[0.3em] text-[#B89855] uppercase mt-1 font-medium">
+                Pastelería de Autor
+              </span>
+            </a>
+          </div>
+
+          {/* Carrito y Admin */}
+          <div className="flex justify-end items-center w-1/3 space-x-4">
             <button
-              onClick={onAdminClick}
-              className="p-2 text-[#1C1917]/40 hover:text-[#1C1917] transition-colors"
+              onClick={onOpenAdmin}
+              className="p-2 text-[#1C1917]/30 hover:text-[#1C1917] transition-colors hidden sm:block"
               title="Panel de Administración"
             >
               <Lock size={18} strokeWidth={1.5} />
             </button>
 
-            {/* Hamburguesa Mobile */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-[#1C1917]"
+              onClick={onOpenCart}
+              className="relative p-2 text-[#1C1917] hover:text-[#B89855] transition-colors flex items-center gap-2"
             >
-              {mobileMenuOpen ? <X size={24} /> : <MenuIcon size={24} />}
+              <span className="hidden lg:block text-sm tracking-widest uppercase mt-1">Cart</span>
+              <div className="relative">
+                <ShoppingBag size={22} strokeWidth={1.5} />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#B89855] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Menú Mobile Desplegable */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#FAF7F2] border-b border-[#1C1917]/10 px-4 py-4 space-y-2">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => {
-                onCategoryChange(cat.id);
-                setMobileMenuOpen(false);
-              }}
-              className={`block w-full text-left py-2 px-3 text-sm tracking-wider uppercase transition-colors ${activeCategory === cat.id
-                  ? 'text-[#B89855] font-semibold bg-[#B89855]/5'
-                  : 'text-[#1C1917]/70'
-                }`}
-            >
-              {cat.name}
-            </button>
-          ))}
+      {/* Menú Desplegable Mobile */}
+      {isMobileMenuOpen && (
+        <div className="sm:hidden bg-[#FAF7F2] border-t border-[#1C1917]/10 px-4 pt-2 pb-4 shadow-lg">
+          <a onClick={() => setIsMobileMenuOpen(false)} href="#catalogo" className="block px-3 py-4 text-sm tracking-widest uppercase text-[#1C1917] border-b border-[#1C1917]/5">Catálogo</a>
+          <a onClick={() => setIsMobileMenuOpen(false)} href="#nosotros" className="block px-3 py-4 text-sm tracking-widest uppercase text-[#1C1917] border-b border-[#1C1917]/5">Nosotros</a>
+          <button onClick={() => { onOpenAdmin(); setIsMobileMenuOpen(false); }} className="w-full text-left px-3 py-4 text-sm tracking-widest uppercase text-[#1C1917]/40 flex items-center gap-2">
+            <Lock size={16} /> Administración
+          </button>
         </div>
       )}
-    </header>
+    </nav>
   );
-}
+};
