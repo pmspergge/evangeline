@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Lock, Menu as MenuIcon, X } from 'lucide-react';
-import { CATEGORIES } from '../data/initialData';
 
 export function Navbar({
   activeCategory,
@@ -12,13 +11,14 @@ export function Navbar({
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Categorías con IDs en texto plano para evitar errores de importación
   const categories = [
     { id: 'all', name: 'Todos' },
-    { id: CATEGORIES.TORTAS_Y_PASTELES, name: 'Tortas & Pasteles' },
-    { id: CATEGORIES.TARTAS, name: 'Tartas' },
-    { id: CATEGORIES.BOXES, name: 'Boxes' },
-    { id: CATEGORIES.GALLETITAS, name: 'Galletitas' },
-    { id: CATEGORIES.INDIVIDUALES, name: 'Individuales' },
+    { id: 'tortas', name: 'Tortas & Pasteles' },
+    { id: 'tartas', name: 'Tartas' },
+    { id: 'boxes', name: 'Boxes' },
+    { id: 'galletitas', name: 'Galletitas' },
+    { id: 'individuales', name: 'Individuales' },
   ];
 
   return (
