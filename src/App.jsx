@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { storage } from './services/storage';
-
-import { Navbar } from './components/Navbar';
+import Navbar from "./components/Navbar";
 import { Hero } from './components/Hero';
 import { ProductGrid } from './components/ProductGrid';
 import { ProductModal } from './components/ProductModal';
@@ -76,14 +75,14 @@ function MainApp() {
       <CheckoutModal settings={settings} />
 
       {/* Admin Experience */}
-      <AdminLogin 
-        isOpen={isAdminLoginOpen} 
+      <AdminLogin
+        isOpen={isAdminLoginOpen}
         onClose={() => {
           setIsAdminLoginOpen(false);
           if (localStorage.getItem('evangeline_admin_logged') === 'true') {
             setIsAdminDashboardOpen(true);
           }
-        }} 
+        }}
       />
 
       <AdminDashboard
