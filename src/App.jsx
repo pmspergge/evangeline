@@ -3,7 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { storage } from './services/storage';
 import Navbar from "./components/Navbar";
-import { Hero } from './components/Hero';
+import Hero from "./components/Hero";
 import { ProductGrid } from './components/ProductGrid';
 import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
