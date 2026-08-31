@@ -72,7 +72,7 @@ export const CustomCakesSection = ({ settings }) => {
               
               <div className="aspect-4/5 rounded-3xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=900&q=80"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE_juOBuMvRYC9tdO0GFfPUeHSfLHXMA6rcLH1JSsk6xOKYNFyVQcD_8U&s=10"
                   alt="Torta de autor personalizada Evangeline"
                   className="w-full h-full object-cover"
                 />
