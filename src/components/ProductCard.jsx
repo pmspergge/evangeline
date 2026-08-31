@@ -12,104 +12,91 @@ export const ProductCard = ({ product }) => {
   }).format(product.price);
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden border border-[#D4AF37]/25 hover:border-[#D4AF37] transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between">
-      
+    <div className="group cursor-pointer flex flex-col bg-transparent h-full">
       {/* Image Container */}
-      <div className="relative aspect-4/3 overflow-hidden bg-stone-100 cursor-pointer" onClick={() => setSelectedProductForModal(product)}>
+      <div 
+        className="relative aspect-[4/5] overflow-hidden rounded-sm mb-4 bg-[#1C1917]/5" 
+        onClick={() => setSelectedProductForModal(product)}
+      >
         <img
           src={product.image || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80'}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        
+        {/* Minimalist Overlay */}
+        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-        {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+        {/* Badges - Editorial Style */}
+        <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
           {product.featured && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-[#1C1917] text-[#D4AF37] border border-[#D4AF37]/60 shadow-md">
-              <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+            <span className="flex items-center gap-1 px-3 py-1 bg-[#1C1917] text-[#FAF7F2] text-[9px] font-bold tracking-[0.2em] uppercase rounded-sm">
+              <Sparkles className="w-3 h-3 text-[#B89855]" strokeWidth={1.5} />
               Destacado
             </span>
           )}
           {product.isNew && (
-            <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-[#D4AF37] text-[#1C1917] shadow-md">
+            <span className="inline-block px-3 py-1 bg-[#FAF7F2] text-[#1C1917] text-[9px] font-bold tracking-[0.2em] uppercase rounded-sm shadow-sm">
               Nuevo
             </span>
           )}
         </div>
-
-        {/* Quick view hover icon */}
+        
+        {/* Quick view button overlay */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             setSelectedProductForModal(product);
           }}
-          className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-xs text-[#1C1917] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-white hover:scale-110 shadow-md cursor-pointer"
+          className="absolute bottom-4 right-4 w-10 h-10 bg-[#FAF7F2] text-[#1C1917] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#1C1917] hover:text-[#FAF7F2] rounded-sm shadow-sm"
           title="Ver detalle"
         >
-          <Eye className="w-4 h-4 text-[#8A6D3B]" />
+          <Eye className="w-4 h-4" strokeWidth={1.5} />
         </button>
       </div>
 
       {/* Content */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
-        <div>
-          {/* Portions / Category tag */}
-          <div className="flex items-center justify-between text-xs text-stone-500 mb-1.5">
-            <span className="font-medium text-[#8A6D3B] uppercase tracking-wider text-[11px]">
-              {product.portions || 'Pastelería fina'}
+      <div className="flex-1 flex flex-col">
+        {/* Meta tags */}
+        <div className="flex items-center justify-between text-[10px] tracking-widest uppercase text-[#1C1917]/50 mb-2">
+          <span className="font-medium">{product.portions || 'Pastelería'}</span>
+          {product.leadTimeHours && (
+            <span className="flex items-center gap-1">
+              <Clock className="w-3 h-3" strokeWidth={1.5} />
+              {product.leadTimeHours}hs
             </span>
-            {product.leadTimeHours && (
-              <span className="flex items-center gap-1 text-[11px] text-stone-400">
-                <Clock className="w-3 h-3" />
-                {product.leadTimeHours}hs anticipación
-              </span>
-            )}
-          </div>
-
-          {/* Title */}
-          <h3 
-            onClick={() => setSelectedProductForModal(product)}
-            className="font-serif-title text-lg font-bold text-[#1C1917] group-hover:text-[#8A6D3B] transition-colors cursor-pointer line-clamp-1"
-          >
-            {product.name}
-          </h3>
-
-          {/* Description */}
-          <p className="mt-2 text-xs text-stone-600 line-clamp-2 leading-relaxed font-normal">
-            {product.description}
-          </p>
+          )}
         </div>
+
+        {/* Title */}
+        <h3 
+          onClick={() => setSelectedProductForModal(product)}
+          className="font-serif text-xl text-[#1C1917] leading-snug group-hover:text-[#B89855] transition-colors line-clamp-2"
+        >
+          {product.name}
+        </h3>
+
+        {/* Description */}
+        <p className="mt-2 text-sm text-[#1C1917]/70 line-clamp-2 font-light leading-relaxed">
+          {product.description}
+        </p>
 
         {/* Price & Action */}
-        <div className="mt-5 pt-4 border-t border-stone-100 flex items-center justify-between">
-          <div>
-            <span className="text-[10px] text-stone-400 block uppercase tracking-wider">Precio</span>
-            <span className="text-lg font-bold text-[#1C1917] font-serif">
-              {formattedPrice}
-            </span>
-          </div>
+        <div className="mt-auto pt-4 flex items-center justify-between">
+          <span className="text-lg font-medium text-[#1C1917]">
+            {formattedPrice}
+          </span>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setSelectedProductForModal(product)}
-              className="px-3 py-2 text-xs font-semibold text-[#8A6D3B] hover:text-[#1C1917] transition-colors cursor-pointer"
-            >
-              Detalles
-            </button>
-            <button
-              onClick={() => addToCart(product, 1)}
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1C1917] text-[#D4AF37] hover:bg-[#292524] active:scale-90 transition-all shadow-md cursor-pointer border border-[#D4AF37]/40"
-              title="Agregar al pedido"
-            >
-              <Plus className="w-4 h-4" />
-            </button>
-          </div>
+          <button
+            onClick={() => addToCart(product, 1)}
+            className="text-[10px] uppercase tracking-widest font-bold text-[#1C1917] hover:text-[#B89855] transition-colors flex items-center gap-1 border-b border-transparent hover:border-[#B89855] pb-0.5"
+            title="Agregar al pedido"
+          >
+            Agregar <Plus className="w-3 h-3 hidden sm:block" />
+          </button>
         </div>
-
       </div>
-
     </div>
   );
 };

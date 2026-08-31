@@ -29,22 +29,22 @@ export const ProductModal = () => {
   }).format(product.price * quantity);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-xs animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#1C1917]/80 backdrop-blur-sm animate-fade-in">
       
       <div 
-        className="relative w-full max-w-2xl bg-[#FAF7F2] rounded-3xl overflow-hidden shadow-2xl border border-[#D4AF37]/40 flex flex-col md:flex-row max-h-[90vh]"
+        className="relative w-full max-w-4xl bg-[#FAF7F2] rounded-sm shadow-2xl border border-[#1C1917]/10 flex flex-col md:flex-row max-h-[90vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-[#1C1917]/80 text-[#FAF7F2] hover:bg-[#1C1917] flex items-center justify-center transition-transform hover:scale-105 cursor-pointer shadow-md"
+          className="absolute top-4 right-4 z-20 w-8 h-8 bg-[#FAF7F2] text-[#1C1917] hover:bg-[#1C1917] hover:text-[#FAF7F2] flex items-center justify-center transition-colors cursor-pointer rounded-sm shadow-sm"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" strokeWidth={1.5} />
         </button>
 
         {/* Product Image */}
-        <div className="md:w-1/2 relative bg-stone-100 min-h-[240px] md:min-h-full">
+        <div className="md:w-1/2 relative bg-[#1C1917]/5 min-h-[300px] md:min-h-full">
           <img
             src={product.image || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80'}
             alt={product.name}
@@ -54,8 +54,8 @@ export const ProductModal = () => {
           
           {product.featured && (
             <div className="absolute top-4 left-4 z-10">
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-[#1C1917] text-[#D4AF37] border border-[#D4AF37]/60 shadow-md">
-                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span className="flex items-center gap-1 px-3 py-1 bg-[#1C1917] text-[#FAF7F2] text-[9px] font-bold tracking-[0.2em] uppercase rounded-sm">
+                <Sparkles className="w-3 h-3 text-[#B89855]" strokeWidth={1.5} />
                 Destacado
               </span>
             </div>
@@ -63,79 +63,79 @@ export const ProductModal = () => {
         </div>
 
         {/* Details & Customization Options */}
-        <div className="md:w-1/2 p-6 sm:p-8 flex flex-col justify-between overflow-y-auto">
+        <div className="md:w-1/2 p-8 sm:p-10 flex flex-col justify-between overflow-y-auto">
           <div>
-            <div className="flex items-center gap-2 text-xs font-medium text-[#8A6D3B] uppercase tracking-wider mb-2">
-              <span>{product.portions}</span>
-              <span>•</span>
+            <div className="flex items-center gap-2 text-[10px] tracking-widest uppercase text-[#1C1917]/50 mb-4">
+              <span className="font-medium">{product.portions || 'Pastelería'}</span>
+              <span>|</span>
               <span className="flex items-center gap-1">
-                <Clock className="w-3 h-3" />
-                {product.leadTimeHours || 48}hs de anticipación
+                <Clock className="w-3 h-3" strokeWidth={1.5} />
+                {product.leadTimeHours || 48}hs
               </span>
             </div>
 
-            <h2 className="font-serif-title text-2xl sm:text-3xl font-bold text-[#1C1917]">
+            <h2 className="font-serif text-3xl sm:text-4xl font-light text-[#1C1917] leading-tight">
               {product.name}
             </h2>
 
-            <p className="mt-3 text-xs sm:text-sm text-stone-600 leading-relaxed">
+            <p className="mt-4 text-sm text-[#1C1917]/70 leading-relaxed font-light">
               {product.description}
             </p>
 
             {/* Custom Dedication Note input */}
-            <div className="mt-6">
-              <label className="block text-xs font-bold text-[#1C1917] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <MessageSquare className="w-3.5 h-3.5 text-[#8A6D3B]" />
-                Dedicatoria o mensaje personalizado (Opcional)
+            <div className="mt-8">
+              <label className="flex items-center gap-2 text-[10px] tracking-widest uppercase text-[#1C1917] mb-3">
+                <MessageSquare className="w-3 h-3 text-[#B89855]" strokeWidth={1.5} />
+                Nota especial (Opcional)
               </label>
               <textarea
                 value={customNote}
                 onChange={(e) => setCustomNote(e.target.value)}
-                placeholder="Ej: 'Feliz Cumple Valen', agregar velita, sin nueces, etc."
+                placeholder="Ej: 'Feliz Cumple Valen', agregar velita..."
                 rows={2}
-                className="w-full text-xs p-3 rounded-xl border border-stone-300 focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] bg-white transition-colors resize-none placeholder:text-stone-400"
+                className="w-full text-sm p-3 rounded-sm border border-[#1C1917]/20 focus:border-[#B89855] focus:ring-0 bg-transparent outline-none transition-colors resize-none placeholder:text-[#1C1917]/30 font-light"
               />
             </div>
           </div>
 
           {/* Quantity and Price Footer */}
-          <div className="mt-8 pt-4 border-t border-stone-200">
-            <div className="flex items-center justify-between mb-4">
+          <div className="mt-8 pt-6 border-t border-[#1C1917]/10">
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <span className="text-[11px] text-stone-500 uppercase block tracking-wider font-medium">
+                <span className="text-[10px] tracking-widest uppercase text-[#1C1917]/50 block mb-1">
                   Total estimado
                 </span>
-                <span className="text-2xl font-bold text-[#1C1917] font-serif">
+                <span className="text-2xl font-medium text-[#1C1917]">
                   {formattedPrice}
                 </span>
               </div>
 
-              {/* Quantity Counter */}
-              <div className="flex items-center border border-stone-300 rounded-full bg-white p-1">
+              {/* Minimalist Quantity Counter */}
+              <div className="flex items-center border border-[#1C1917]/20 rounded-sm bg-transparent h-10">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-7 h-7 rounded-full flex items-center justify-center text-stone-600 hover:bg-stone-100 transition-colors cursor-pointer"
+                  className="w-10 h-full flex items-center justify-center text-[#1C1917]/50 hover:text-[#1C1917] hover:bg-[#1C1917]/5 transition-colors"
                 >
-                  <Minus className="w-3.5 h-3.5" />
+                  <Minus className="w-3 h-3" strokeWidth={1.5} />
                 </button>
-                <span className="w-8 text-center text-xs font-bold text-[#1C1917]">
+                <span className="w-10 text-center text-xs font-medium text-[#1C1917]">
                   {quantity}
                 </span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-7 h-7 rounded-full flex items-center justify-center text-stone-600 hover:bg-stone-100 transition-colors cursor-pointer"
+                  className="w-10 h-full flex items-center justify-center text-[#1C1917]/50 hover:text-[#1C1917] hover:bg-[#1C1917]/5 transition-colors"
                 >
-                  <Plus className="w-3.5 h-3.5" />
+                  <Plus className="w-3 h-3" strokeWidth={1.5} />
                 </button>
               </div>
             </div>
 
             <button
               onClick={handleAdd}
-              className="w-full py-3.5 bg-[#1C1917] text-[#FAF7F2] rounded-2xl font-semibold text-xs sm:text-sm hover:bg-[#292524] active:scale-98 transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer border border-[#D4AF37]/50 group"
+              className="w-full py-4 bg-[#1C1917] text-[#FAF7F2] rounded-sm text-[10px] tracking-widest uppercase hover:bg-[#1C1917]/90 transition-all flex items-center justify-center gap-2 shadow-sm"
             >
-              <ShoppingBag className="w-4 h-4 text-[#D4AF37] group-hover:scale-110 transition-transform" />
-              <span>Agregar al pedido ({formattedPrice})</span>
+              <ShoppingBag className="w-4 h-4 text-[#B89855]" strokeWidth={1.5} />
+              Agregar al pedido
             </button>
           </div>
 

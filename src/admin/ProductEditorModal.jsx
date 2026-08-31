@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Save, Image, Sparkles, AlertCircle } from 'lucide-react';
+import { X, Save, Image as ImageIcon, Sparkles } from 'lucide-react';
 import { storage } from '../services/storage';
 
 export const ProductEditorModal = ({ isOpen, onClose, product, categories, onSaveSuccess }) => {
@@ -39,7 +39,7 @@ export const ProductEditorModal = ({ isOpen, onClose, product, categories, onSav
         price: 25000,
         portions: '10 a 12 porciones',
         description: '',
-        image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80',
+        image: '',
         featured: false,
         isNew: true,
         active: true,
@@ -78,70 +78,58 @@ export const ProductEditorModal = ({ isOpen, onClose, product, categories, onSav
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1C1917]/80 backdrop-blur-sm overflow-y-auto">
       <div 
-        className="relative w-full max-w-2xl bg-[#FAF7F2] rounded-3xl overflow-hidden shadow-2xl border border-[#D4AF37]/50 max-h-[92vh] flex flex-col"
+        className="relative w-full max-w-2xl bg-[#FAF7F2] rounded-sm shadow-2xl border border-[#1C1917]/10 max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-5 sm:p-6 bg-white border-b border-stone-200 flex items-center justify-between sticky top-0 z-10">
+        <div className="p-6 bg-[#FAF7F2] border-b border-[#1C1917]/10 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[#8A6D3B]" />
-            <h3 className="font-serif-title text-lg font-bold text-[#1C1917]">
-              {product ? 'Editar Producto' : 'Nuevo Producto en Catálogo'}
+            <Sparkles className="w-5 h-5 text-[#B89855]" strokeWidth={1.5} />
+            <h3 className="font-serif text-xl tracking-wide text-[#1C1917] uppercase">
+              {product ? 'Editar Producto' : 'Nuevo Producto'}
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-stone-400 hover:text-[#1C1917] rounded-full hover:bg-stone-100 transition-colors cursor-pointer"
+            className="p-2 text-[#1C1917]/50 hover:text-[#1C1917] transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5" strokeWidth={1.5} />
           </button>
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-5 sm:p-6 overflow-y-auto space-y-4">
+        <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-5">
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label className="block text-xs font-bold text-[#1C1917] mb-1">
-                Nombre del Producto *
-              </label>
+              <label className="block text-xs tracking-widest uppercase text-[#1C1917] mb-2">Nombre *</label>
               <input
                 type="text"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="Ej: Torta Pavlova de Frutos Rojos"
-                className="w-full text-xs p-3 rounded-xl border border-stone-300 focus:border-[#D4AF37] bg-white"
+                className="w-full text-sm p-3 rounded-sm border border-[#1C1917]/20 focus:border-[#B89855] focus:ring-0 bg-transparent outline-none transition-colors"
               />
             </div>
-
             <div>
-              <label className="block text-xs font-bold text-[#1C1917] mb-1">
-                Categoría
-              </label>
+              <label className="block text-xs tracking-widest uppercase text-[#1C1917] mb-2">Categoría</label>
               <select
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className="w-full text-xs p-3 rounded-xl border border-stone-300 focus:border-[#D4AF37] bg-white"
+                className="w-full text-sm p-3 rounded-sm border border-[#1C1917]/20 focus:border-[#B89855] bg-transparent outline-none uppercase tracking-wider"
               >
-                {categories
-                  .filter((c) => c.id !== 'all')
-                  .map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.name}
-                    </option>
-                  ))}
+                {categories.filter((c) => c.id !== 'all').map((cat) => (
+                  <option key={cat.id} value={cat.id}>{cat.name}</option>
+                ))}
               </select>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <div>
-              <label className="block text-xs font-bold text-[#1C1917] mb-1">
-                Precio en ARS ($) *
-              </label>
+              <label className="block text-xs tracking-widest uppercase text-[#1C1917] mb-2">Precio ($) *</label>
               <input
                 type="number"
                 required
@@ -149,134 +137,103 @@ export const ProductEditorModal = ({ isOpen, onClose, product, categories, onSav
                 step="500"
                 value={formData.price}
                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                className="w-full text-xs p-3 rounded-xl border border-stone-300 focus:border-[#D4AF37] bg-white"
+                className="w-full text-sm p-3 rounded-sm border border-[#1C1917]/20 focus:border-[#B89855] bg-transparent outline-none"
               />
             </div>
-
             <div>
-              <label className="block text-xs font-bold text-[#1C1917] mb-1">
-                Rendimiento / Porciones
-              </label>
+              <label className="block text-xs tracking-widest uppercase text-[#1C1917] mb-2">Porciones</label>
               <input
                 type="text"
                 value={formData.portions}
                 onChange={(e) => setFormData({ ...formData, portions: e.target.value })}
-                placeholder="Ej: 10 a 12 porciones"
-                className="w-full text-xs p-3 rounded-xl border border-stone-300 focus:border-[#D4AF37] bg-white"
+                className="w-full text-sm p-3 rounded-sm border border-[#1C1917]/20 focus:border-[#B89855] bg-transparent outline-none"
               />
             </div>
-
             <div>
-              <label className="block text-xs font-bold text-[#1C1917] mb-1">
-                Anticipación (Horas)
-              </label>
+              <label className="block text-xs tracking-widest uppercase text-[#1C1917] mb-2">Anticipación (Hs)</label>
               <input
                 type="number"
                 value={formData.leadTimeHours}
                 onChange={(e) => setFormData({ ...formData, leadTimeHours: e.target.value })}
-                className="w-full text-xs p-3 rounded-xl border border-stone-300 focus:border-[#D4AF37] bg-white"
+                className="w-full text-sm p-3 rounded-sm border border-[#1C1917]/20 focus:border-[#B89855] bg-transparent outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#1C1917] mb-1">
-              Descripción & Rellenos
-            </label>
+            <label className="block text-xs tracking-widest uppercase text-[#1C1917] mb-2">Descripción</label>
             <textarea
               rows={3}
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              placeholder="Describí los ingredientes nobles, capas de bizcochuelo, ganache, frosting..."
-              className="w-full text-xs p-3 rounded-xl border border-stone-300 focus:border-[#D4AF37] bg-white resize-none"
+              className="w-full text-sm p-3 rounded-sm border border-[#1C1917]/20 focus:border-[#B89855] bg-transparent outline-none resize-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#1C1917] mb-1 flex items-center gap-1">
-              <Image className="w-3.5 h-3.5 text-[#8A6D3B]" />
-              URL de la Fotografía
+            <label className="flex items-center gap-2 text-xs tracking-widest uppercase text-[#1C1917] mb-2">
+              <ImageIcon className="w-4 h-4 text-[#B89855]" strokeWidth={1.5} />
+              URL de la Imagen
             </label>
-            <input
-              type="url"
-              value={formData.image}
-              onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-              placeholder="https://images.unsplash.com/..."
-              className="w-full text-xs p-3 rounded-xl border border-stone-300 focus:border-[#D4AF37] bg-white"
-            />
-            {formData.image && (
-              <div className="mt-2 w-20 h-20 rounded-xl overflow-hidden border border-stone-300 bg-stone-100">
-                <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
-              </div>
-            )}
+            <div className="flex gap-4 items-start">
+              <input
+                type="url"
+                value={formData.image}
+                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                placeholder="https://ejemplo.com/foto.jpg"
+                className="flex-1 text-sm p-3 rounded-sm border border-[#1C1917]/20 focus:border-[#B89855] bg-transparent outline-none"
+              />
+              {formData.image && (
+                <img src={formData.image} alt="Preview" className="w-16 h-16 object-cover rounded-sm border border-[#1C1917]/10" />
+              )}
+            </div>
+            <p className="text-[10px] text-[#1C1917]/50 mt-1 uppercase tracking-wide">Pegá el link de una imagen (Ej: Instagram o Pinterest) para no saturar la memoria.</p>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#1C1917] mb-1">
-              Etiquetas (separadas por coma)
-            </label>
+            <label className="block text-xs tracking-widest uppercase text-[#1C1917] mb-2">Etiquetas</label>
             <input
               type="text"
               value={formData.tags}
               onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-              placeholder="Destacado, Sin TACC, Chocolate belga, Pistacho..."
-              className="w-full text-xs p-3 rounded-xl border border-stone-300 focus:border-[#D4AF37] bg-white"
+              className="w-full text-sm p-3 rounded-sm border border-[#1C1917]/20 focus:border-[#B89855] bg-transparent outline-none"
             />
           </div>
 
           {/* Toggles */}
-          <div className="pt-2 grid grid-cols-3 gap-3">
-            <label className="flex items-center gap-2 p-3 bg-white rounded-xl border border-stone-200 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.featured}
-                onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-                className="rounded text-[#D4AF37] focus:ring-[#D4AF37]"
-              />
-              <span className="text-xs font-semibold text-[#1C1917]">Destacado</span>
-            </label>
-
-            <label className="flex items-center gap-2 p-3 bg-white rounded-xl border border-stone-200 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.isNew}
-                onChange={(e) => setFormData({ ...formData, isNew: e.target.checked })}
-                className="rounded text-[#D4AF37] focus:ring-[#D4AF37]"
-              />
-              <span className="text-xs font-semibold text-[#1C1917]">Novedad</span>
-            </label>
-
-            <label className="flex items-center gap-2 p-3 bg-white rounded-xl border border-stone-200 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.active}
-                onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                className="rounded text-[#D4AF37] focus:ring-[#D4AF37]"
-              />
-              <span className="text-xs font-semibold text-[#1C1917]">En Catálogo</span>
-            </label>
+          <div className="pt-2 grid grid-cols-3 gap-4">
+            {['featured', 'isNew', 'active'].map((field) => (
+              <label key={field} className="flex items-center justify-center gap-2 p-3 border border-[#1C1917]/10 rounded-sm cursor-pointer hover:border-[#B89855]/50 transition-colors">
+                <input
+                  type="checkbox"
+                  checked={formData[field]}
+                  onChange={(e) => setFormData({ ...formData, [field]: e.target.checked })}
+                  className="rounded-sm text-[#B89855] focus:ring-0 border-[#1C1917]/20"
+                />
+                <span className="text-xs uppercase tracking-widest text-[#1C1917]">
+                  {field === 'featured' ? 'Destacado' : field === 'isNew' ? 'Novedad' : 'Activo'}
+                </span>
+              </label>
+            ))}
           </div>
 
-          {/* Footer Submit */}
-          <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-3">
+          {/* Footer */}
+          <div className="pt-6 mt-6 border-t border-[#1C1917]/10 flex justify-end gap-4">
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 rounded-xl border border-stone-300 text-xs font-semibold text-stone-600 hover:bg-stone-100 transition-colors"
+              className="px-6 py-3 text-xs tracking-widest uppercase text-[#1C1917] hover:text-[#B89855] transition-colors"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 bg-[#1C1917] text-[#D4AF37] font-semibold text-xs rounded-xl hover:bg-[#292524] transition-all flex items-center gap-1.5 shadow-md"
+              className="px-8 py-3 bg-[#1C1917] text-[#FAF7F2] text-xs tracking-widest uppercase rounded-sm hover:bg-[#1C1917]/90 transition-colors flex items-center gap-2"
             >
-              <Save className="w-4 h-4" />
-              <span>Guardar Producto</span>
+              <Save className="w-4 h-4" /> Guardar
             </button>
           </div>
-
         </form>
-
       </div>
     </div>
   );
