@@ -73,18 +73,19 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 bg-black/70 backdrop-blur-xs overflow-y-auto animate-fade-in">
-      
-      <div 
+      <div
         className="relative w-full max-w-6xl bg-[#FAF7F2] rounded-3xl overflow-hidden shadow-2xl border border-[#D4AF37]/50 flex flex-col h-[95vh]"
         onClick={(e) => e.stopPropagation()}
       >
-        
         {/* Admin Header */}
         <div className="p-4 sm:p-6 bg-[#1C1917] text-[#FAF7F2] flex flex-wrap items-center justify-between gap-4 border-b border-[#D4AF37]/40 shrink-0">
-          
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-[#D4AF37] bg-[#EFE9DF] shrink-0">
-              <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
+              <img
+                src="/logo.png"
+                alt="Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -96,7 +97,8 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                 </span>
               </div>
               <p className="text-xs text-stone-400">
-                {products.length} productos • {orders.length} pedidos registrados
+                {products.length} productos • {orders.length} pedidos
+                registrados
               </p>
             </div>
           </div>
@@ -104,11 +106,11 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
           {/* Tab navigation buttons */}
           <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 p-1 rounded-2xl border border-white/10 text-xs font-semibold">
             <button
-              onClick={() => setActiveTab('products')}
+              onClick={() => setActiveTab("products")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
-                activeTab === 'products'
-                  ? 'bg-[#D4AF37] text-[#1C1917] shadow-sm'
-                  : 'text-stone-300 hover:text-white'
+                activeTab === "products"
+                  ? "bg-[#D4AF37] text-[#1C1917] shadow-sm"
+                  : "text-stone-300 hover:text-white"
               }`}
             >
               <Package className="w-4 h-4" />
@@ -116,11 +118,11 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
             </button>
 
             <button
-              onClick={() => setActiveTab('orders')}
+              onClick={() => setActiveTab("orders")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
-                activeTab === 'orders'
-                  ? 'bg-[#D4AF37] text-[#1C1917] shadow-sm'
-                  : 'text-stone-300 hover:text-white'
+                activeTab === "orders"
+                  ? "bg-[#D4AF37] text-[#1C1917] shadow-sm"
+                  : "text-stone-300 hover:text-white"
               }`}
             >
               <ShoppingBag className="w-4 h-4" />
@@ -128,11 +130,11 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
             </button>
 
             <button
-              onClick={() => setActiveTab('settings')}
+              onClick={() => setActiveTab("settings")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
-                activeTab === 'settings'
-                  ? 'bg-[#D4AF37] text-[#1C1917] shadow-sm'
-                  : 'text-stone-300 hover:text-white'
+                activeTab === "settings"
+                  ? "bg-[#D4AF37] text-[#1C1917] shadow-sm"
+                  : "text-stone-300 hover:text-white"
               }`}
             >
               <Settings className="w-4 h-4" />
@@ -159,20 +161,19 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
               <LogOut className="w-4 h-4" />
             </button>
           </div>
-
         </div>
 
         {/* Tab 1: Products Manager */}
-        {activeTab === 'products' && (
+        {activeTab === "products" && (
           <div className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-6">
-            
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <h3 className="font-serif-title text-xl font-bold text-[#1C1917]">
                   Gestión del Catálogo de Productos
                 </h3>
                 <p className="text-xs text-stone-500">
-                  Podés pausar stock, cambiar precios o sumar nuevas creaciones en tiempo real
+                  Podés pausar stock, cambiar precios o sumar nuevas creaciones
+                  en tiempo real
                 </p>
               </div>
 
@@ -194,11 +195,17 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                 <div
                   key={prod.id}
                   className={`p-4 rounded-2xl border transition-all bg-white shadow-xs flex gap-4 items-start ${
-                    prod.active ? 'border-stone-200' : 'border-stone-200 opacity-60 bg-stone-50'
+                    prod.active
+                      ? "border-stone-200"
+                      : "border-stone-200 opacity-60 bg-stone-50"
                   }`}
                 >
                   <div className="w-20 h-20 rounded-xl overflow-hidden bg-stone-100 shrink-0">
-                    <img src={prod.image} alt={prod.name} className="w-full h-full object-cover" />
+                    <img
+                      src={prod.image}
+                      alt={prod.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
 
                   <div className="flex-1 min-w-0">
@@ -210,9 +217,17 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                         <button
                           onClick={() => handleToggleActive(prod)}
                           className="p-1 text-stone-400 hover:text-[#1C1917]"
-                          title={prod.active ? 'Pausar (Ocultar)' : 'Activar (Mostrar)'}
+                          title={
+                            prod.active
+                              ? "Pausar (Ocultar)"
+                              : "Activar (Mostrar)"
+                          }
                         >
-                          {prod.active ? <Eye className="w-3.5 h-3.5 text-green-600" /> : <EyeOff className="w-3.5 h-3.5 text-stone-400" />}
+                          {prod.active ? (
+                            <Eye className="w-3.5 h-3.5 text-green-600" />
+                          ) : (
+                            <EyeOff className="w-3.5 h-3.5 text-stone-400" />
+                          )}
                         </button>
                         <button
                           onClick={() => {
@@ -225,7 +240,9 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                           <Edit2 className="w-3.5 h-3.5 text-[#8A6D3B]" />
                         </button>
                         <button
-                          onClick={() => handleDeleteProduct(prod.id, prod.name)}
+                          onClick={() =>
+                            handleDeleteProduct(prod.id, prod.name)
+                          }
                           className="p-1 text-stone-300 hover:text-red-600"
                           title="Eliminar"
                         >
@@ -244,40 +261,47 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
 
                     <div className="mt-2 flex items-center justify-between">
                       <span className="text-xs font-bold text-[#1C1917] font-serif">
-                        ${prod.price?.toLocaleString('es-AR')}
+                        ${prod.price?.toLocaleString("es-AR")}
                       </span>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        prod.active ? 'bg-green-100 text-green-800' : 'bg-stone-200 text-stone-600'
-                      }`}>
-                        {prod.active ? 'En Catálogo' : 'Pausado'}
+                      <span
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                          prod.active
+                            ? "bg-green-100 text-green-800"
+                            : "bg-stone-200 text-stone-600"
+                        }`}
+                      >
+                        {prod.active ? "En Catálogo" : "Pausado"}
                       </span>
                     </div>
-
                   </div>
                 </div>
               ))}
             </div>
-
           </div>
         )}
 
         {/* Tab 2: Orders Manager */}
-        {activeTab === 'orders' && (
+        {activeTab === "orders" && (
           <div className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-6">
             <div>
               <h3 className="font-serif-title text-xl font-bold text-[#1C1917]">
                 Registro de Pedidos Recibidos
               </h3>
               <p className="text-xs text-stone-500">
-                Pedidos generados desde la tienda PWA para seguimiento de estados y agenda
+                Pedidos generados desde la tienda PWA para seguimiento de
+                estados y agenda
               </p>
             </div>
 
             {orders.length === 0 ? (
               <div className="text-center py-16 bg-white rounded-3xl border border-stone-200">
                 <ShoppingBag className="w-12 h-12 text-stone-300 mx-auto mb-2" />
-                <p className="text-sm font-medium text-stone-600">Aún no hay pedidos registrados</p>
-                <p className="text-xs text-stone-400 mt-1">Los pedidos completados desde la web aparecerán aquí.</p>
+                <p className="text-sm font-medium text-stone-600">
+                  Aún no hay pedidos registrados
+                </p>
+                <p className="text-xs text-stone-400 mt-1">
+                  Los pedidos completados desde la web aparecerán aquí.
+                </p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -298,21 +322,27 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                           </span>
                         </div>
                         <span className="text-[11px] text-stone-400">
-                          {new Date(order.createdAt).toLocaleString('es-AR')}
+                          {new Date(order.createdAt).toLocaleString("es-AR")}
                         </span>
                       </div>
 
                       {/* Status Selector */}
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-stone-500 font-medium">Estado:</span>
+                        <span className="text-xs text-stone-500 font-medium">
+                          Estado:
+                        </span>
                         <select
                           value={order.status}
-                          onChange={(e) => handleUpdateOrderStatus(order.id, e.target.value)}
+                          onChange={(e) =>
+                            handleUpdateOrderStatus(order.id, e.target.value)
+                          }
                           className="text-xs font-semibold px-3 py-1.5 rounded-xl border border-stone-300 bg-[#FAF7F2] text-[#1C1917]"
                         >
                           <option value="Pendiente">Pendiente</option>
                           <option value="En preparación">En preparación</option>
-                          <option value="Listo para entrega">Listo para entrega</option>
+                          <option value="Listo para entrega">
+                            Listo para entrega
+                          </option>
                           <option value="Entregado">Entregado</option>
                           <option value="Cancelado">Cancelado</option>
                         </select>
@@ -322,17 +352,31 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                     {/* Order details grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-stone-600">
                       <div>
-                        <span className="font-bold block text-[#1C1917] mb-1">Entrega & Fecha:</span>
-                        <p>{order.deliveryType === 'delivery' ? '🛵 Envío a domicilio' : '🏬 Retiro en La Plata'}</p>
-                        <p className="font-semibold text-[#8A6D3B]">📅 {order.deliveryDate} ({order.timeSlot})</p>
-                        {order.address && <p className="text-[11px] text-stone-500 mt-1">📍 {order.address}</p>}
+                        <span className="font-bold block text-[#1C1917] mb-1">
+                          Entrega & Fecha:
+                        </span>
+                        <p>
+                          {order.deliveryType === "delivery"
+                            ? "🛵 Envío a domicilio"
+                            : "🏬 Retiro en La Plata"}
+                        </p>
+                        <p className="font-semibold text-[#8A6D3B]">
+                          📅 {order.deliveryDate} ({order.timeSlot})
+                        </p>
+                        {order.address && (
+                          <p className="text-[11px] text-stone-500 mt-1">
+                            📍 {order.address}
+                          </p>
+                        )}
                       </div>
 
                       <div>
-                        <span className="font-bold block text-[#1C1917] mb-1">Contacto & Pago:</span>
-                        <a 
-                          href={`https://wa.me/${order.customerPhone?.replace(/\D/g, '')}`} 
-                          target="_blank" 
+                        <span className="font-bold block text-[#1C1917] mb-1">
+                          Contacto & Pago:
+                        </span>
+                        <a
+                          href={`https://wa.me/${order.customerPhone?.replace(/\D/g, "")}`}
+                          target="_blank"
                           rel="noreferrer"
                           className="inline-flex items-center gap-1 text-green-600 hover:underline font-semibold"
                         >
@@ -345,13 +389,16 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                       </div>
 
                       <div>
-                        <span className="font-bold block text-[#1C1917] mb-1">Total del Pedido:</span>
+                        <span className="font-bold block text-[#1C1917] mb-1">
+                          Total del Pedido:
+                        </span>
                         <span className="text-base font-bold text-[#1C1917] font-serif">
-                          ${order.total?.toLocaleString('es-AR')}
+                          ${order.total?.toLocaleString("es-AR")}
                         </span>
                         {order.deliveryFee > 0 && (
                           <span className="text-[10px] text-stone-400 block">
-                            (Incluye envío ${order.deliveryFee?.toLocaleString('es-AR')})
+                            (Incluye envío $
+                            {order.deliveryFee?.toLocaleString("es-AR")})
                           </span>
                         )}
                       </div>
@@ -364,13 +411,23 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                       </span>
                       <ul className="text-xs space-y-1">
                         {order.items?.map((item, idx) => (
-                          <li key={idx} className="flex items-center justify-between text-stone-700">
+                          <li
+                            key={idx}
+                            className="flex items-center justify-between text-stone-700"
+                          >
                             <span>
                               {item.quantity}x <strong>{item.name}</strong>
-                              {item.customNote && <span className="text-[#8A6D3B] italic ml-2">("{item.customNote}")</span>}
+                              {item.customNote && (
+                                <span className="text-[#8A6D3B] italic ml-2">
+                                  ("{item.customNote}")
+                                </span>
+                              )}
                             </span>
                             <span className="font-serif font-semibold">
-                              ${(item.price * item.quantity).toLocaleString('es-AR')}
+                              $
+                              {(item.price * item.quantity).toLocaleString(
+                                "es-AR",
+                              )}
                             </span>
                           </li>
                         ))}
@@ -381,26 +438,24 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                         </p>
                       )}
                     </div>
-
                   </div>
                 ))}
               </div>
             )}
-
           </div>
         )}
 
         {/* Tab 3: Settings Manager */}
-        {activeTab === 'settings' && (
+        {activeTab === "settings" && (
           <div className="flex-1 p-4 sm:p-6 overflow-y-auto">
-            
             <form onSubmit={handleSaveSettings} className="max-w-2xl space-y-6">
               <div>
                 <h3 className="font-serif-title text-xl font-bold text-[#1C1917]">
                   Configuración del Negocio
                 </h3>
                 <p className="text-xs text-stone-500">
-                  Ajustá tu número de WhatsApp para recibir pedidos, datos bancarios y tarifas de envío
+                  Ajustá tu número de WhatsApp para recibir pedidos, datos
+                  bancarios y tarifas de envío
                 </p>
               </div>
 
@@ -423,8 +478,13 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                     </label>
                     <input
                       type="text"
-                      value={settingsForm.whatsappNumber || ''}
-                      onChange={(e) => setSettingsForm({ ...settingsForm, whatsappNumber: e.target.value })}
+                      value={settingsForm.whatsappNumber || ""}
+                      onChange={(e) =>
+                        setSettingsForm({
+                          ...settingsForm,
+                          whatsappNumber: e.target.value,
+                        })
+                      }
                       placeholder="5492215551234"
                       className="w-full text-xs p-3 rounded-xl border border-stone-300 bg-[#FAF7F2]"
                     />
@@ -439,8 +499,13 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                     </label>
                     <input
                       type="text"
-                      value={settingsForm.instagramUser || ''}
-                      onChange={(e) => setSettingsForm({ ...settingsForm, instagramUser: e.target.value })}
+                      value={settingsForm.instagramUser || ""}
+                      onChange={(e) =>
+                        setSettingsForm({
+                          ...settingsForm,
+                          instagramUser: e.target.value,
+                        })
+                      }
                       placeholder="evangeline.bakehouse"
                       className="w-full text-xs p-3 rounded-xl border border-stone-300 bg-[#FAF7F2]"
                     />
@@ -453,8 +518,13 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                   </label>
                   <input
                     type="text"
-                    value={settingsForm.pickupAddress || ''}
-                    onChange={(e) => setSettingsForm({ ...settingsForm, pickupAddress: e.target.value })}
+                    value={settingsForm.pickupAddress || ""}
+                    onChange={(e) =>
+                      setSettingsForm({
+                        ...settingsForm,
+                        pickupAddress: e.target.value,
+                      })
+                    }
                     placeholder="Zona Centro / Plaza Paso, La Plata"
                     className="w-full text-xs p-3 rounded-xl border border-stone-300 bg-[#FAF7F2]"
                   />
@@ -468,7 +538,30 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                     <input
                       type="number"
                       value={settingsForm.deliveryCostBase || 2500}
-                      onChange={(e) => setSettingsForm({ ...settingsForm, deliveryCostBase: Number(e.target.value) })}
+                      onChange={(e) =>
+                        setSettingsForm({
+                          ...settingsForm,
+                          deliveryCostBase: Number(e.target.value),
+                        })
+                      }
+                      className="w-full text-xs p-3 rounded-xl border border-stone-300 bg-[#FAF7F2]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-[#1C1917] mb-1">
+                      URL de Foto - Tortas Personalizadas
+                    </label>
+                    <input
+                      type="url"
+                      value={settingsForm.customCakeImage || ""}
+                      onChange={(e) =>
+                        setSettingsForm({
+                          ...settingsForm,
+                          customCakeImage: e.target.value,
+                        })
+                      }
+                      placeholder="https://ejemplo.com/torta.jpg"
                       className="w-full text-xs p-3 rounded-xl border border-stone-300 bg-[#FAF7F2]"
                     />
                   </div>
@@ -480,12 +573,16 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                     <input
                       type="number"
                       value={settingsForm.minNoticeHours || 48}
-                      onChange={(e) => setSettingsForm({ ...settingsForm, minNoticeHours: Number(e.target.value) })}
+                      onChange={(e) =>
+                        setSettingsForm({
+                          ...settingsForm,
+                          minNoticeHours: Number(e.target.value),
+                        })
+                      }
                       className="w-full text-xs p-3 rounded-xl border border-stone-300 bg-[#FAF7F2]"
                     />
                   </div>
                 </div>
-
               </div>
 
               {/* Bank Settings */}
@@ -501,8 +598,13 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                     </label>
                     <input
                       type="text"
-                      value={settingsForm.bankAlias || ''}
-                      onChange={(e) => setSettingsForm({ ...settingsForm, bankAlias: e.target.value })}
+                      value={settingsForm.bankAlias || ""}
+                      onChange={(e) =>
+                        setSettingsForm({
+                          ...settingsForm,
+                          bankAlias: e.target.value,
+                        })
+                      }
                       placeholder="EVANGELINE.PASTELERIA"
                       className="w-full text-xs p-3 rounded-xl border border-stone-300 bg-[#FAF7F2] font-mono"
                     />
@@ -514,8 +616,13 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                     </label>
                     <input
                       type="text"
-                      value={settingsForm.bankHolder || ''}
-                      onChange={(e) => setSettingsForm({ ...settingsForm, bankHolder: e.target.value })}
+                      value={settingsForm.bankHolder || ""}
+                      onChange={(e) =>
+                        setSettingsForm({
+                          ...settingsForm,
+                          bankHolder: e.target.value,
+                        })
+                      }
                       placeholder="Melisa Leyes"
                       className="w-full text-xs p-3 rounded-xl border border-stone-300 bg-[#FAF7F2]"
                     />
@@ -528,13 +635,17 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                   </label>
                   <input
                     type="text"
-                    value={settingsForm.bannerNotice || ''}
-                    onChange={(e) => setSettingsForm({ ...settingsForm, bannerNotice: e.target.value })}
+                    value={settingsForm.bannerNotice || ""}
+                    onChange={(e) =>
+                      setSettingsForm({
+                        ...settingsForm,
+                        bannerNotice: e.target.value,
+                      })
+                    }
                     placeholder="✨ Pedidos con 48hs de anticipación • Envíos en La Plata"
                     className="w-full text-xs p-3 rounded-xl border border-stone-300 bg-[#FAF7F2]"
                   />
                 </div>
-
               </div>
 
               <div className="flex justify-end">
@@ -546,12 +657,9 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
                   <span>Guardar Configuración</span>
                 </button>
               </div>
-
             </form>
-
           </div>
         )}
-
       </div>
 
       {/* Product Editor Modal */}
@@ -565,7 +673,6 @@ export const AdminDashboard = ({ isOpen, onClose }) => {
         categories={categories}
         onSaveSuccess={loadAllData}
       />
-
     </div>
   );
 };

@@ -40,21 +40,21 @@ export const Hero = ({ settings }) => {
           Tortas de autor, tartas clásicas, boxes de regalo y delicias dulces horneadas a pedido con ingredientes nobles y amor en cada detalle.
         </p>
 
-        {/* Botones de acción iterativos */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-24 px-4">
+        {/* Botones de acción iterativos y táctiles */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-5 mb-24 px-4">
           <button
             onClick={scrollToCatalog}
-            className="group w-full sm:w-auto bg-[#1C1917] text-[#FAF7F2] px-8 py-4 rounded-sm flex items-center justify-center gap-3 hover:bg-[#292524] active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg uppercase tracking-[0.2em] text-[10px] sm:text-xs font-semibold"
+            className="group cursor-pointer w-full sm:w-auto bg-[#1C1917] text-[#FAF7F2] px-9 py-4 rounded-sm flex items-center justify-center gap-3 hover:bg-[#B89855] hover:text-white hover:shadow-[0_8px_20px_-6px_rgba(184,152,85,0.4)] active:scale-95 active:bg-[#99783D] transition-all duration-300 uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold"
           >
             Ver Menú & Pedir 
-            <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" strokeWidth={1.5} />
+            <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" strokeWidth={2} />
           </button>
           
           <button
             onClick={scrollToCustom}
-            className="group w-full sm:w-auto border border-[#B89855]/50 text-[#1C1917] px-8 py-4 rounded-sm hover:border-[#B89855] hover:bg-[#B89855]/5 active:scale-95 transition-all duration-300 uppercase tracking-[0.2em] text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-3"
+            className="group cursor-pointer w-full sm:w-auto bg-transparent border border-[#B89855] text-[#1C1917] px-9 py-4 rounded-sm hover:bg-[#B89855] hover:text-white hover:shadow-[0_8px_20px_-6px_rgba(184,152,85,0.4)] active:scale-95 active:bg-[#99783D] transition-all duration-300 uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold flex items-center justify-center gap-3"
           >
-            <Sparkles size={16} className="text-[#B89855] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300" strokeWidth={1.5} />
+            <Sparkles size={16} className="text-[#B89855] group-hover:text-white group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" strokeWidth={2} />
             Tortas Personalizadas
           </button>
         </div>
